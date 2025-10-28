@@ -1,0 +1,220 @@
+#include 'tlpp-core.th'
+#include 'tlpp-rest.th'
+#Include "Totvs.ch"
+#Include "RESTFul.ch"
+#Include "TopConn.ch"
+
+@Get("/fanual")
+Function u_fat_anual()
+  Local jResponse    := JsonObject():New()
+  Local aJson        := {}
+  Local jQueryString   := Nil 
+  Local cQuery         := Nil
+ 
+   
+  jQueryString := oRest:getQueryRequest()
+
+  If (Select("TRB1") <> 0) 
+		dbSelectArea("TRB1") 
+		TRB1->(dbCloseArea("TRB1"))
+	EndIf
+
+  cQuery := "Select SUBSTRING(E1_VENCTO, 5,2) Mes, SUM(E1_Valor) Honorarios, SUM(E1_Saldo) Saldo, SUM(E1_Valor) - SUM(E1_Saldo) Recebido "
+  cQuery += "From Se1010 "
+  cQuery += "Where D_E_L_E_T_ = '' And SUBSTRING(E1_VENCTO, 1,4) = '2025' and E1_VENCTO < '20250724' "
+  cQuery += "Group By SUBSTRING(E1_VENCTO, 5,2) "
+  cQuery += "Order By SUBSTRING(E1_VENCTO, 5,2)"
+  
+  PlsQuery(cQuery,"TRB1")
+  dbSelectArea("TRB1")
+	TRB1->(dbGoTop())
+
+  While TRB1->(!EOF())
+
+    Aadd(aJson,JsonObject():new())
+    nPos := Len(aJson)
+    aJson[nPos]['mes']        := TRB1->Mes
+    aJson[nPos]['honorarios'] := TRB1->Honorarios
+    aJson[nPos]['saldo']      := TRB1->Saldo
+    aJson[nPos]['recebido']   := TRB1->Recebido
+
+    TRB1->(DbSkip())
+
+  Enddo
+
+  TRB1->(DbCloseArea())
+
+  jResponse:set(aJson)
+  oRest:setKeyHeaderResponse('Content-Type','application/json')
+  oRest:setResponse(jResponse:toJSON())
+
+Return .T.
+
+@Get("/vreceber")
+Function u_val_receber()
+  Local jResponse    := JsonObject():New()
+  Local aJson        := {}
+  Local jQueryString   := Nil 
+  Local cQuery         := Nil
+ 
+   
+  jQueryString := oRest:getQueryRequest()
+
+  If (Select("TRB1") <> 0) 
+		dbSelectArea("TRB1") 
+		TRB1->(dbCloseArea("TRB1"))
+	EndIf
+
+  cQuery := "Select ISNULL(ROUND(SUM(E1_VALOR),2), 0) receber "
+  cQuery += "From Se1010 "
+  cQuery += "Where D_E_L_E_T_ = '' and E1_VENCTO BETWEEN '20250901' AND '20250931'"
+  
+  PlsQuery(cQuery,"TRB1")
+  dbSelectArea("TRB1")
+	TRB1->(dbGoTop())
+
+  While TRB1->(!EOF())
+
+    Aadd(aJson,JsonObject():new())
+    nPos := Len(aJson)
+    aJson[nPos]['receber']        := TRB1->receber
+
+    TRB1->(DbSkip())
+
+  Enddo
+
+  TRB1->(DbCloseArea())
+
+  jResponse:set(aJson)
+  oRest:setKeyHeaderResponse('Content-Type','application/json')
+  oRest:setResponse(jResponse:toJSON())
+
+Return .T.
+
+@Get("/vaberto")
+Function u_val_aberto()
+  Local jResponse    := JsonObject():New()
+  Local aJson        := {}
+  Local jQueryString   := Nil 
+  Local cQuery         := Nil
+ 
+   
+  jQueryString := oRest:getQueryRequest()
+
+  If (Select("TRB1") <> 0) 
+		dbSelectArea("TRB1") 
+		TRB1->(dbCloseArea("TRB1"))
+	EndIf
+
+  cQuery := "Select ISNULL(ROUND(SUM(E1_SALDO),2), 0) aberto "
+  cQuery += "From Se1010 "
+  cQuery += "Where D_E_L_E_T_ = '' and E1_VENCTO BETWEEN '20250901' AND '20250931'"
+  
+  PlsQuery(cQuery,"TRB1")
+  dbSelectArea("TRB1")
+	TRB1->(dbGoTop())
+
+  While TRB1->(!EOF())
+
+    Aadd(aJson,JsonObject():new())
+    nPos := Len(aJson)
+    aJson[nPos]['aberto']        := TRB1->aberto
+
+    TRB1->(DbSkip())
+
+  Enddo
+
+  TRB1->(DbCloseArea())
+
+  jResponse:set(aJson)
+  oRest:setKeyHeaderResponse('Content-Type','application/json')
+  oRest:setResponse(jResponse:toJSON())
+
+Return .T.
+
+@Get("/fprefixo")
+Function u_fprefixo()
+  Local jResponse    := JsonObject():New()
+  Local aJson        := {}
+  Local jQueryString   := Nil 
+  Local cQuery         := Nil
+ 
+   
+  jQueryString := oRest:getQueryRequest()
+
+  If (Select("TRB1") <> 0) 
+		dbSelectArea("TRB1") 
+		TRB1->(dbCloseArea("TRB1"))
+	EndIf
+
+  cQuery := "Select E1_PREFIXO prefixo, ROUND(SUM(E1_Valor),2) honorarios, ROUND(SUM(E1_Saldo),2) saldo, ROUND(SUM(E1_Valor) - SUM(E1_Saldo),2) recebido "
+  cQuery += "From Se1010 "
+  cQuery += "Where D_E_L_E_T_ = '' And SUBSTRING(E1_VENCTO, 1,4) = '2025' and E1_VENCTO < '20250524' "
+  cQuery += "Group By E1_PREFIXO"
+  
+  PlsQuery(cQuery,"TRB1")
+  dbSelectArea("TRB1")
+	TRB1->(dbGoTop())
+
+  While TRB1->(!EOF())
+
+    Aadd(aJson,JsonObject():new())
+    nPos := Len(aJson)
+    aJson[nPos]['prefixo']    := TRB1->prefixo
+    aJson[nPos]['honorarios'] := TRB1->honorarios
+    aJson[nPos]['saldo']      := TRB1->saldo
+    aJson[nPos]['recebido']   := TRB1->recebido
+    TRB1->(DbSkip())
+
+  Enddo
+
+  TRB1->(DbCloseArea())
+
+  jResponse:set(aJson)
+  oRest:setKeyHeaderResponse('Content-Type','application/json')
+  oRest:setResponse(jResponse:toJSON())
+
+Return .T.
+
+@Get("/utitulos")
+Function u_utitulos()
+  Local jResponse    := JsonObject():New()
+  Local aJson        := {}
+  Local jQueryString   := Nil 
+  Local cQuery         := Nil
+    
+  jQueryString := oRest:getQueryRequest()
+
+  If (Select("TRB1") <> 0) 
+		dbSelectArea("TRB1") 
+		TRB1->(dbCloseArea("TRB1"))
+	EndIf
+
+  cQuery := "Select TOP(10) CONCAT(SUBSTRING(E1_NOMCLI,0,5),'******') nomcli, FORMAT(CAST(E1_VENCTO AS DATE), 'dd \de MMMM \de yyyy', 'pt-br') vencto, E1_Valor valor, ROUND(E1_Valor - (E1_Valor * 0.53), 2) saldo "
+  cQuery += "From Se1010 "
+  cQuery += "Where D_E_L_E_T_ = '' and E1_Vencto = '20251010' "
+  cQuery += "Order by E1_VENCTO DESC"
+  
+  PlsQuery(cQuery,"TRB1")
+  dbSelectArea("TRB1")
+	TRB1->(dbGoTop())
+
+  While TRB1->(!EOF())
+
+    Aadd(aJson,JsonObject():new())
+    nPos := Len(aJson)
+    aJson[nPos]['nomcli'] := TRB1->nomcli
+    aJson[nPos]['vencto'] := Alltrim(TRB1->vencto)
+    aJson[nPos]['valor']  := TRB1->valor
+    aJson[nPos]['saldo']  := TRB1->saldo
+    TRB1->(DbSkip())
+
+  Enddo
+
+  TRB1->(DbCloseArea())
+
+  jResponse:set(aJson)
+  oRest:setKeyHeaderResponse('Content-Type','application/json')
+  oRest:setResponse(jResponse:toJSON())
+
+Return .T.
