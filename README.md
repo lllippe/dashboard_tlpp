@@ -1,3 +1,52 @@
+🚀 **Protheus + Flutter em 3 Semanas: A Jornada da Modernização de Dashboards**
+
+Olá, comunidade de desenvolvedores e entusiastas de ERP!
+
+Sabemos que o Protheus é um sistema robusto, o coração de muitas empresas. No entanto, o desafio de **visualizar dados consolidados e em tempo real**, com a velocidade e a experiência de usuário que o mercado moderno exige, muitas vezes nos leva a caminhos complexos ou lentos. Consultar dashboards de gestão diretamente em portais legados pode ser um teste de paciência.
+
+Foi pensando nisso que nasceu **nosso projeto**: transformar dados críticos do Protheus em uma aplicação móvel moderna e ultrarrápida, usando a combinação perfeita de tecnologias!
+
+***
+
+💡 **Apresentação do Projeto: Dashboard Financeiro Ágil**
+
+Nesta série de posts, mostrarei o passo a passo da construção de um **Dashboard de Gestão Financeira** completo, indo do backend AdvPL/TL++ até o Front-end em Flutter.
+
+**Assista ao Carrossel de Vídeos Abaixo!**
+
+***
+
+**Por que esta Combinação?**
+
+A escolha da nossa stack não foi por acaso:
+<ul>
+<li>**TOTVS Protheus & TL++**: Utilização da linguagem nativa (AdvPL/TL++) com o **Framework REST do Protheus** para transformar consultas complexas em endpoints leves e otimizados, minimizando o impacto no servidor.</li>
+<li>**Flutter**: A tecnologia ideal para construir um aplicativo móvel com performance nativa (Android e iOS), permitindo um layout moderno, gráficos dinâmicos e uma experiência de usuário de altíssimo nível.</li>
+</ul>
+
+O resultado é um sistema de gestão financeira que oferece a profundidade de dados do Protheus com a agilidade que a tomada de decisão exige.
+
+***
+
+🗺️ **O Plano das Próximas 2 Semanas**
+
+Para mantermos o foco e a agilidade (assim como nosso Dashboard!), a série será dividida em apenas três postagens dinâmicas:
+
+| Semana | Tema da Postagem | O que você vai aprender |
+| : - - | : - - | : - - |
+| **Semana 1** | **Apresentação do Projeto (Esta postagem!)** | Visão geral, problema, solução e a stack de tecnologia. |
+| **Semana 2** | **O Coração: Backend Protheus com TL++** | Configuração detalhada do appserver.ini, análise do código fonte em TL++ e a criação dos endpoints REST. |
+| **Semana 3** | **A Interface: Flutter e Integração REST** | Construção do layout em Flutter, consumo dos endpoints Protheus e implementação da segurança via OAuth2. |
+
+Se você trabalha com Protheus e busca modernizar a forma como os dados são consumidos, esta série é para você!
+Na próxima semana, vamos mergulhar no código! Você verá como transformamos consultas SQL complexas em APIs REST otimizadas usando o TL++ e o AppServer.
+
+Acompanhe, favorite e prepare seu ambiente de desenvolvimento!
+
+**#Protheus #Flutter #AdvPL #RESTAPI #TLPP #Dashboard #Desenvolvimento**
+
+***
+
 🚀 **Semana 2: Configurando o Servidor REST e Criando a Primeira API em TL++**
 
 Olá, Devs! Chegamos à segunda semana da nossa jornada! Depois de entender a arquitetura, é hora de colocar a mão na massa e configurar o coração da nossa solução: **o servidor REST do Protheus** e a nossa primeira API em **TL++**.
