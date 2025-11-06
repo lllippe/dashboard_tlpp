@@ -32,11 +32,28 @@ O resultado é um sistema de gestão financeira que oferece a profundidade de da
 
 Para mantermos o foco e a agilidade (assim como nosso Dashboard!), a série será dividida em apenas três postagens dinâmicas:
 
-| Semana | Tema da Postagem | O que você vai aprender |
-| : - - | : - - | : - - |
-| **Semana 1** | **Apresentação do Projeto (Esta postagem!)** | Visão geral, problema, solução e a stack de tecnologia. |
-| **Semana 2** | **O Coração: Backend Protheus com TL++** | Configuração detalhada do appserver.ini, análise do código fonte em TL++ e a criação dos endpoints REST. |
-| **Semana 3** | **A Interface: Flutter e Integração REST** | Construção do layout em Flutter, consumo dos endpoints Protheus e implementação da segurança via OAuth2. |
+<table>
+    <tr>
+        <td><b>Semana</b></td>
+        <td><b>Tema da Postagem</b></td>
+        <td><b>O que você vai aprender</b></td>
+    </tr>
+    <tr>
+        <td><b>Semana 1</b></td>
+        <td><b>Apresentação do Projeto (Esta postagem!)</b></td>
+        <td>Visão geral, problema, solução e a stack de tecnologia.</td>
+    </tr>
+    <tr>
+        <td><b>Semana 2</b></td>
+        <td><b>O Coração: Backend Protheus com TL++</b></td>
+        <td>Configuração detalhada do appserver.ini, análise do código fonte em TL++ e a criação dos endpoints REST.</td>
+    </tr>
+    <tr>
+        <td><b>Semana 3</b></td>
+        <td><b>A Interface: Flutter e Integração REST</b></td>
+        <td>Construção do layout em Flutter, consumo dos endpoints Protheus e implementação da segurança via OAuth2.</td>
+    </tr>    
+</table>
 
 Se você trabalha com Protheus e busca modernizar a forma como os dados são consumidos, esta série é para você!
 Na próxima semana, vamos mergulhar no código! Você verá como transformamos consultas SQL complexas em APIs REST otimizadas usando o TL++ e o AppServer.
