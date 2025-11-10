@@ -150,10 +150,16 @@ A solução resolve a lentidão no acesso a dados consolidados no ERP, fornecend
 ## 📂 Estrutura do Repositório
 
 O repositório está dividido em duas pastas principais para separar as camadas da aplicação:
-
-dashboard_tlpp/├── backend-protheus/│   ├── appserver.ini           # Configuração do AppServer para subir o REST.│   └── dashboard.tlpp          # Código fonte em TL++ com os endpoints da API.└── frontend-flutter/├── lib/                    # Código fonte da aplicação Flutter (Layout, Telas, Conexão).├── pubspec.yaml            # Dependências do Flutter.└── ...                     # Outros arquivos de projeto Flutter.
----
-
+```
+dashboard_tlpp/
+├── appserver.ini    # Configuração do AppServer para subir o REST.
+├── dashboard.tlpp   # Código fonte em TL++ com os endpoints da API.
+└── dashboard_tlpp/  
+    ├── lib/         # Código fonte da aplicação Flutter (Layout, Telas, Conexão).  
+    ├── pubspec.yaml # Dependências do Flutter.
+    └── ...          # Outros arquivos de projeto Flutter.
+```
+##
 ## ⚙️ Backend Protheus: Configuração e TL++
 
 ### 1. Configuração do AppServer (`appserver.ini`)
@@ -194,6 +200,76 @@ Environment=HOMOLOG
 
 [ONSTART]
 Jobs=HTTPJOB
+```
 
-**2. Implementação da API** (dashboard.tlpp)O arquivo dashboard.tlpp utiliza o framework WSRESTFUL do Protheus para mapear funções TL++ a endpoints REST, utilizando a annotation @Get. Todas as consultas são realizadas via PlsQuery na tabela SE1010 (Contas a Receber) para garantir a performance.3. CompilaçãoPara que os endpoints funcionem:Compile o arquivo dashboard.tlpp no RPO do ambiente configurado (HOMOLOG).Reinicie a instância do AppServer que está rodando o serviço REST.📞 Endpoints da APITodos os endpoints utilizam o caminho base /rest e retornam um array de objetos JSON:MétodoEndpointDescriçãoGET/rest/fanualRetorna o Faturamento e Saldo Anual por Mês.GET/rest/vreceberRetorna o Valor Consolidado a Receber no período.GET/rest/vabertoRetorna o Valor Consolidado de Saldo em Aberto no período.GET/rest/fprefixoRetorna o Faturamento Consolidado por Prefixo de Título.GET/rest/utitulosRetorna os últimos 10 Títulos com detalhes do cliente e valores.🔒 Autenticação (OAuth2)A comunicação entre o Flutter e o Protheus é totalmente segura, utilizando o protocolo OAuth2.O primeiro passo é obter o token de acesso (JWT) através do endpoint padrão do Protheus:POST /api/oauth2/v1/token
-O token recebido deve ser enviado em todas as requisições subsequentes no Header Authorization (padrão Bearer).📱 Frontend FlutterO código no diretório frontend-flutter contém a aplicação que consome os endpoints acima.Pré-requisitos:Flutter SDK instalado.Dependências instaladas (Execute flutter pub get na pasta frontend-flutter).Configuração da URL base da API no código do Flutter para apontar para o seu AppServer Protheus (http://<IP_DO_SERVIDOR>:8090/rest).🤝 ContribuiçõesSinta-se à vontade para enviar sugestões, pull requests ou reportar issues. Este projeto visa ser um guia prático para a integração Protheus + Tecnologias Modernas!
+### 2. Implementação da API (dashboard.tlpp)
+
+O arquivo dashboard.tlpp utiliza o framework WSRESTFUL do Protheus para mapear funções TL++ a endpoints REST, utilizando a annotation @Get. Todas as consultas são realizadas via PlsQuery na tabela SE1010 (Contas a Receber) para garantir a performance.
+
+### 3. Compilação 
+
+Para que os endpoints funcionem:
+* Compile o arquivo dashboard.tlpp no RPO do ambiente configurado (HOMOLOG).
+* Reinicie a instância do AppServer que está rodando o serviço REST.
+
+### 📞 Endpoints da API
+
+Todos os endpoints utilizam o caminho base /rest e retornam um array de objetos JSON:
+<table>
+    <tr>
+        <td><b>Método</b></td>
+        <td><b>Endpoint</b></td>
+        <td><b>Descrição</b></td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/rest/fanual</td>
+        <td>Retorna o Faturamento e Saldo Anual por Mês.</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/rest/vreceber</td>
+        <td>Retorna o Valor Consolidado a Receber no período.</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/rest/vaberto</td>
+        <td>Retorna o Valor Consolidado de Saldo em Aberto no período.</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/rest/fprefixo</td>
+        <td>Retorna o Faturamento Consolidado por Prefixo de Título.</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/rest/utitulos</td>
+        <td>Retorna os últimos 10 Títulos com detalhes do cliente e valores.</td>
+    </tr>
+</table>
+
+##
+
+### 🔒 Autenticação (OAuth2)
+
+A comunicação entre o Flutter e o Protheus é totalmente segura, utilizando o protocolo OAuth2.
+
+O primeiro passo é obter o token de acesso (JWT) através do endpoint padrão do Protheus:
+
+POST /api/oauth2/v1/token
+
+O token recebido deve ser enviado em todas as requisições subsequentes no Header Authorization (padrão Bearer).
+
+##
+
+### 📱 Frontend Flutter
+
+O código no diretório frontend-flutter contém a aplicação que consome os endpoints acima.
+
+Pré-requisitos:
+* Flutter SDK instalado.
+* Dependências instaladas (Execute flutter pub get na pasta frontend-flutter).
+* Configuração da URL base da API no código do Flutter para apontar para o seu AppServer Protheus (http://IP_DO_SERVIDOR:8090/rest).
+
+### 🤝 Contribuições
+Sinta-se à vontade para enviar sugestões, pull requests ou reportar issues. Este projeto visa ser um guia prático para a integração Protheus + Tecnologias Modernas!
