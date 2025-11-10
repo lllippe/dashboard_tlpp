@@ -1,69 +1,3 @@
-🚀 **Protheus + Flutter em 3 Semanas: A Jornada da Modernização de Dashboards**
-
-Olá, comunidade de desenvolvedores e entusiastas de ERP!
-
-Sabemos que o Protheus é um sistema robusto, o coração de muitas empresas. No entanto, o desafio de **visualizar dados consolidados e em tempo real**, com a velocidade e a experiência de usuário que o mercado moderno exige, muitas vezes nos leva a caminhos complexos ou lentos. Consultar dashboards de gestão diretamente em portais legados pode ser um teste de paciência.
-
-Foi pensando nisso que nasceu **nosso projeto**: transformar dados críticos do Protheus em uma aplicação móvel moderna e ultrarrápida, usando a combinação perfeita de tecnologias!
-
-***
-
-💡 **Apresentação do Projeto: Dashboard Financeiro Ágil**
-
-Nesta série de posts, mostrarei o passo a passo da construção de um **Dashboard de Gestão Financeira** completo, indo do backend AdvPL/TL++ até o Front-end em Flutter.
-
-**Assista ao Carrossel de Vídeos Abaixo!**
-
-***
-
-**Por que esta Combinação?**
-
-A escolha da nossa stack não foi por acaso:
-<ul>
-<li>**TOTVS Protheus & TL++**: Utilização da linguagem nativa (AdvPL/TL++) com o **Framework REST do Protheus** para transformar consultas complexas em endpoints leves e otimizados, minimizando o impacto no servidor.</li>
-<li>**Flutter**: A tecnologia ideal para construir um aplicativo móvel com performance nativa (Android e iOS), permitindo um layout moderno, gráficos dinâmicos e uma experiência de usuário de altíssimo nível.</li>
-</ul>
-
-O resultado é um sistema de gestão financeira que oferece a profundidade de dados do Protheus com a agilidade que a tomada de decisão exige.
-
-***
-
-🗺️ **O Plano das Próximas 2 Semanas**
-
-Para mantermos o foco e a agilidade (assim como nosso Dashboard!), a série será dividida em apenas três postagens dinâmicas:
-
-<table>
-    <tr>
-        <td><b>Semana</b></td>
-        <td><b>Tema da Postagem</b></td>
-        <td><b>O que você vai aprender</b></td>
-    </tr>
-    <tr>
-        <td><b>Semana 1</b></td>
-        <td><b>Apresentação do Projeto (Esta postagem!)</b></td>
-        <td>Visão geral, problema, solução e a stack de tecnologia.</td>
-    </tr>
-    <tr>
-        <td><b>Semana 2</b></td>
-        <td><b>O Coração: Backend Protheus com TL++</b></td>
-        <td>Configuração detalhada do appserver.ini, análise do código fonte em TL++ e a criação dos endpoints REST.</td>
-    </tr>
-    <tr>
-        <td><b>Semana 3</b></td>
-        <td><b>A Interface: Flutter e Integração REST</b></td>
-        <td>Construção do layout em Flutter, consumo dos endpoints Protheus e implementação da segurança via OAuth2.</td>
-    </tr>    
-</table>
-
-Se você trabalha com Protheus e busca modernizar a forma como os dados são consumidos, esta série é para você!
-Na próxima semana, vamos mergulhar no código! Você verá como transformamos consultas SQL complexas em APIs REST otimizadas usando o TL++ e o AppServer.
-
-Acompanhe, favorite e prepare seu ambiente de desenvolvimento!
-
-**#Protheus #Flutter #AdvPL #RESTAPI #TLPP #Dashboard #Desenvolvimento**
-
-***
-
 🚀 **Semana 2: Configurando o Servidor REST e Criando a Primeira API em TL++**
 
 Olá, Devs! Chegamos à segunda semana da nossa jornada! Depois de entender a arquitetura, é hora de colocar a mão na massa e configurar o coração da nossa solução: **o servidor REST do Protheus** e a nossa primeira API em **TL++**.
@@ -188,3 +122,78 @@ GitHub: https://github.com/lllippe/dashboard_tlpp
 Vejo vocês na próxima semana, quando iniciaremos o desenvolvimento em Flutter! Fiquem ligados! 🚀
 
 **#TOTVS #RESTAPI #Integração #Flutter #TLPP #OAuth2**
+
+
+# 🚀 Dashboard Financeiro Ágil: Protheus (TL++) + Flutter
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Protheus-TL++-blue" alt="Protheus TL++">
+  <img src="https://img.shields.io/badge/Frontend-Flutter-46c0e5" alt="Frontend Flutter">
+  <img src="https://img.shields.io/badge/API-REST-success" alt="API REST">
+  <img src="https://img.shields.io/badge/Autenticação-OAuth2-orange" alt="Autenticação OAuth2">
+</p>
+
+Este projeto é o resultado da série de três semanas **"Protheus + Flutter em 3 Semanas"**, onde demonstramos a construção de um Dashboard de Gestão Financeira com alta performance. O objetivo é modernizar o consumo de dados consolidados do Protheus, utilizando o AppServer como uma camada de API leve e o Flutter para uma experiência mobile fluida e nativa.
+
+## 🎯 Visão Geral do Projeto
+
+A solução resolve a lentidão no acesso a dados consolidados no ERP, fornecendo uma interface de usuário moderna e otimizada, capaz de carregar informações em tempo real (como Faturamento, Contas a Receber e Saldo em Aberto) diretamente do Protheus.
+
+### 🧩 Stack de Tecnologia
+
+* **Backend (ERP API):** TOTVS Protheus, AppServer, ADVPL/TL++ (utilizando `WSRESTFUL` e `PlsQuery`).
+* **Banco de Dados:** SQL Server (ou o banco de dados configurado no ambiente Protheus).
+* **Frontend (Mobile):** Flutter / Dart.
+* **Comunicação:** REST (padrão JSON).
+* **Segurança:** OAuth2 nativo do Protheus.
+
+## 📂 Estrutura do Repositório
+
+O repositório está dividido em duas pastas principais para separar as camadas da aplicação:
+
+dashboard_tlpp/├── backend-protheus/│   ├── appserver.ini           # Configuração do AppServer para subir o REST.│   └── dashboard.tlpp          # Código fonte em TL++ com os endpoints da API.└── frontend-flutter/├── lib/                    # Código fonte da aplicação Flutter (Layout, Telas, Conexão).├── pubspec.yaml            # Dependências do Flutter.└── ...                     # Outros arquivos de projeto Flutter.
+---
+
+## ⚙️ Backend Protheus: Configuração e TL++
+
+### 1. Configuração do AppServer (`appserver.ini`)
+
+A configuração abaixo transforma a *thread* do AppServer em um Listener HTTP/REST, configurando a porta e forçando a segurança.
+
+**Destaques:**
+
+* **`[HTTPREST]`**: Define a `Port` (`8090`) e habilita a `Security=1`.
+* **`[HTTPURI]`**: Define o caminho base da API (`URL=/rest`) e força a preparação do ambiente na filial `01` (`PrepareIn=01`).
+* **`[ONSTART]`**: Garante que o serviço HTTPJOB seja iniciado automaticamente.
+
+```ini
+[HTTPV11]
+Enable=1
+Sockets=HTTPREST
+Environment=HOMOLOG
+
+[HTTPREST]
+Port=8090
+IPsBind=
+Security=1
+AllowBasic=0
+URIs=HTTPURI
+ResponseTimeOut=300
+
+[HTTPURI]
+URL=/rest
+PrepareIn=01
+Instances=1,1
+CORSEnable=1
+AllowOrigin=*
+StateLess=1
+
+[HTTPJOB]
+MAIN=HTTP_START
+Environment=HOMOLOG
+
+[ONSTART]
+Jobs=HTTPJOB
+
+**2. Implementação da API** (dashboard.tlpp)O arquivo dashboard.tlpp utiliza o framework WSRESTFUL do Protheus para mapear funções TL++ a endpoints REST, utilizando a annotation @Get. Todas as consultas são realizadas via PlsQuery na tabela SE1010 (Contas a Receber) para garantir a performance.3. CompilaçãoPara que os endpoints funcionem:Compile o arquivo dashboard.tlpp no RPO do ambiente configurado (HOMOLOG).Reinicie a instância do AppServer que está rodando o serviço REST.📞 Endpoints da APITodos os endpoints utilizam o caminho base /rest e retornam um array de objetos JSON:MétodoEndpointDescriçãoGET/rest/fanualRetorna o Faturamento e Saldo Anual por Mês.GET/rest/vreceberRetorna o Valor Consolidado a Receber no período.GET/rest/vabertoRetorna o Valor Consolidado de Saldo em Aberto no período.GET/rest/fprefixoRetorna o Faturamento Consolidado por Prefixo de Título.GET/rest/utitulosRetorna os últimos 10 Títulos com detalhes do cliente e valores.🔒 Autenticação (OAuth2)A comunicação entre o Flutter e o Protheus é totalmente segura, utilizando o protocolo OAuth2.O primeiro passo é obter o token de acesso (JWT) através do endpoint padrão do Protheus:POST /api/oauth2/v1/token
+O token recebido deve ser enviado em todas as requisições subsequentes no Header Authorization (padrão Bearer).📱 Frontend FlutterO código no diretório frontend-flutter contém a aplicação que consome os endpoints acima.Pré-requisitos:Flutter SDK instalado.Dependências instaladas (Execute flutter pub get na pasta frontend-flutter).Configuração da URL base da API no código do Flutter para apontar para o seu AppServer Protheus (http://<IP_DO_SERVIDOR>:8090/rest).🤝 ContribuiçõesSinta-se à vontade para enviar sugestões, pull requests ou reportar issues. Este projeto visa ser um guia prático para a integração Protheus + Tecnologias Modernas!
